@@ -26,8 +26,8 @@ Route::get('/', function () {
 // });
 
 Route::get('/episodes', function () {
-
-    $data = TvMazeAPI::fetchEpisodes();
-
-    return view('episodes/index', ["episodes"=>$name]);
+    $shownumber = intval(request()->query('shownumber'));
+    $shownumber = $shownumber < 1 ? 10 : $shownumber
+    $episodes = TvMazeAPI::fetch($shownumber);
+    return view('episodes', ['episodes' => $episodes]);
 });
