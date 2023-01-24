@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Collection;
 
 class TvMazeAPI {
-    public static function fetch($shownumber){
+    public static function fetchEpisodes($shownumber){
         $charactersData = Http::get("https://api.tvmaze.com/shows/$shownumber/episodes")->json();
 
         dd($charactersData);
@@ -14,7 +14,7 @@ class TvMazeAPI {
         $charactersCollection = collect($charactersData);
         
         return $charactersCollection->map(function($charactersData){
-            return new Episodes($episodes['name'], $episodes['image']['medium'], $episodes['season'], $episodes['$episode'], $episodes['summary']) ;
+            return new Episodes($episode['name'], $episode['image']['medium'], $episode['season'], $episode['$episode'], $episode['summary']) ;
         });
     }
 }
