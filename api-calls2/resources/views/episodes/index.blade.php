@@ -9,7 +9,7 @@
     <h1>Episodes</h1>
     <ul>
         @foreach ($episodes as $episode)
-        <li>{{$episode->name}}</li>
+        <li>{{$episode}}</li>
         @endforeach
     </ul>
 
