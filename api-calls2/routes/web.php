@@ -29,7 +29,7 @@ Route::get('/', function () {
 
 Route::get('/load-episodes', function () {
     $shownumber = intval(request()->query('shownumber'));
-    $shownumber = $shownumber < 1 ? 10 : $shownumber;
+    $shownumber = $shownumber < 1 ? 1 : $shownumber;
     $episodes = TvMazeAPI::fetchEpisodes($shownumber);
     return view('episodes/index', ['episodes' => $episodes]);
 });
@@ -37,7 +37,7 @@ Route::get('/load-episodes', function () {
 
 Route::get(' /view-episodes', function () {
     $shownumber = intval(request()->query('shownumber'));
-    $shownumber = $shownumber < 1 ? 10 : $shownumber;
+    $shownumber = $shownumber < 1 ? 1 : $shownumber;
     $episodes   = Episode::where('show_Number', $shownumber)->get();
 
     return view('episodes/index', ['episodes' => $episodes]);
