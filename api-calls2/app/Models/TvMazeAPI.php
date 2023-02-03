@@ -13,8 +13,11 @@ class TvMazeAPI {
 
         $episodeCollection = collect($episodeResponse);
         
-        return $episodeCollection->map(function($episode){
-            return new Episode($episode['name'], $episode['image']['medium'], $episode['season'], $episode['number'], $episode['summary']);
-        });
+        return $episodeCollection->map(function ($input) use ($shownumber) {
+            $image = isset($input['image']['medium']) ? $input['image']['medium'] : "";
+            return Episode::firstOrCreate(['name' => $input['name'], 'image' => $image, 'season' => $input['season'], 'episode' => $input['number'], 'show_number' => $shownumber, 'summary' => strip_tags($input['summary'])]);
+        }, $episodeCollection);
     }
 }
+
+//firstOrCreate will try to locate an object that already exists. If it doesnt exist, it will create it.

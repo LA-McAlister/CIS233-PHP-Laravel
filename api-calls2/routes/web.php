@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\episodes;
+use App\Models\Episode;
 use Illuminate\Support\Facades\Route;
 use App\Models\TvMazeAPI;
 
@@ -27,11 +27,19 @@ Route::get('/', function () {
 //     return view('episodes/index', ['episodes' => $episodes]);
 // });
 
-Route::get('/episodes', function () {
+Route::get('/load-episodes', function () {
     $shownumber = intval(request()->query('shownumber'));
     $shownumber = $shownumber < 1 ? 1 : $shownumber;
     $episodes = TvMazeAPI::fetchEpisodes($shownumber);
-    return view('episodes.index', ['episodes' => $episodes]);
+    return view('episodes/index', ['episodes' => $episodes]);
 });
 
+
+Route::get(' /view-episodes', function () {
+    $shownumber = intval(request()->query('shownumber'));
+    $shownumber = $shownumber < 1 ? 1 : $shownumber;
+    $episodes   = Episode::where('show_Number', $shownumber)->get();
+
+    return view('episodes/index', ['episodes' => $episodes]);
+});
 ?>
