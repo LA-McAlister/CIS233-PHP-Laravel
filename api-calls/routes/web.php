@@ -35,7 +35,7 @@ Route::get('/load-episodes', function () {
 });
 
 
-Route::get(' /view-episodes', function () {
+Route::get('/view-episodes', function () {
     $shownumber = intval(request()->query('shownumber'));
     $shownumber = $shownumber < 1 ? 1 : $shownumber;
     $episodes   = Episode::where('show_Number', $shownumber)->get();
