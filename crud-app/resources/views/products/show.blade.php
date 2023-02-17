@@ -1,8 +1,9 @@
 @extends('layout')
 
 @section('content')
-<h3>Show Product Detail</h3>
+
 <div class="container mt-5">
+<h3>Show Product Detail</h3>
   <table class="table table-bordered mb-5">
     <thead>
       <tr class="table-primary">

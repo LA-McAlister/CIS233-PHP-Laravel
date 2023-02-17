@@ -2,11 +2,11 @@
     @extends('layout')
 
     @section('content')
-    <div class="container mt-5">  
-  <a class="btn btn-primary mb-2" href="{{route('products.create')}}">Create Product</a>
-  <div class="d-flex ">
-    {{ $products->links('pagination::bootstrap-4') }}
-  </div>
+  <div class="container mt-5">  
+    <a class="btn btn-primary mb-2" href="{{route('products.create')}}">Create Product</a>
+    <div class="d-flex ">
+       {{ $products->links('pagination::bootstrap-4') }}
+    </div>
   <table class ="table table-striped table-hover">
       <thead>
         <tr class="table-primary">

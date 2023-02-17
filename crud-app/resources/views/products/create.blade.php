@@ -1,6 +1,7 @@
 @extends('layout')
 
 @section('content')
+<div class="container mt-5">
 <div class="column col-3">
   <h3>Add a Product</h3>
 </div>
@@ -24,4 +25,5 @@
     <a href="{{route('products.index')}}" class="btn btn-danger">Cancel</a>
   </div>
 </form>
+</div>
 @endSection
