@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->decimal('price', 20, 2);
+            $table->decimal('price');
             $table->text('description');
             $table->integer('item_number');
+            $table->string('image')->nullable();
         });
     }
 

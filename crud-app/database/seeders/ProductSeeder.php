@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use Faker\Provider\en_US\Text;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Product;
 
 class ProductSeeder extends Seeder
 {
@@ -19,15 +21,17 @@ class ProductSeeder extends Seeder
         //iterate N number of times to create that many products 
         //create a product 
 
-        \App\Models\Product::query()->delete();
+        Product::query()->delete();
+
+        $faker = \Faker\Factory::create();
 
         foreach(range(1,30) as $product) {
-            \App\Models\Product::create([
-                'name' => 'computer',
-                'price' => '399.99',
-                'description' => 'Ryzen 4000 Series',
-                'item_number' => '3648'
-                
+            Product::create([
+                'name' => $faker->company,
+                'price' => $faker->randomFloat(2, 0, 1000),
+                'description' => $faker->text,
+                'item_number' => $faker->numberBetween(1000,10000),
+                'image' => $faker->imageUrl(width: 50 , height: 50)
             ]);
 
         }

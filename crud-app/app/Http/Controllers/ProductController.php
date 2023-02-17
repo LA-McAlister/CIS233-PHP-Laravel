@@ -22,50 +22,67 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
-        //
+        $product = new Product;
+        return view('products.create', ['product' => $product]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        //
+        Product::create($this->validatedData($request));
+        return redirect()->route('products.index')->with('success', 'Product was added successully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
         //may need to make this plural
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
         return view('products.show', ['product' => $product]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): Response
+    public function edit($id)
     {
-        //
+        $product =  Product::findOrFail($id);
+        return view('products.edit', ['product' => $product]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, $id)
     {
-        //
+        Product::findOrFail($id)->update($this->validatedData($request));
+        return redirect()->route('products.index')->with('success', 'Product was updated successully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->route('products.index')->with('success', 'Product was deleted');
+    }
+
+    private function validatedData($request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'price' => 'decimal:2',
+            'description' => 'required',
+            'item_number' => 'integer|required',
+        ]);
+        return $validatedData;
     }
 }
