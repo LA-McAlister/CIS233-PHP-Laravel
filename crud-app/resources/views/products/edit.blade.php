@@ -7,14 +7,6 @@
   <h3>Edit a Product</h3>
 </div>
 
-@if ( $errors->any() )
-<div class="alert alert-danger" role="alert">
-  @forEach ( $errors->all() as $error)
-  <span>{{$error}}</span><br />
-  @endForEach
-</div>
-@endIf
-
 <form method="POST" action="{{route('products.update', $product->id)}}">
   @csrf
   @method('PUT')
