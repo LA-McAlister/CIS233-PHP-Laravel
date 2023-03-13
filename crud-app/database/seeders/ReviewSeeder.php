@@ -22,7 +22,7 @@ class ReviewSeeder extends Seeder
     foreach (range(1,30) as $review) {
       \App\Models\Review::create([
         'comment' => $faker->text,
-        'rating' => $faker->numberBetween(1, 5),
+        'rating' => $faker->numberBetween(1,5),
         'product_id' => \App\Models\Product::all()->pluck('id')->random()
       ]);
     };

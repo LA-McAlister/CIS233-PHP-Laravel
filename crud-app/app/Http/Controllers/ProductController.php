@@ -65,7 +65,7 @@ class ProductController extends Controller
     {
         Product::findOrFail($id)->update($this->validatedData($request));
         return redirect()->route('products.index')->with('success', 'Product was updated');
-    }
+                             }
 
     /**
      * Remove the specified resource from storage.
