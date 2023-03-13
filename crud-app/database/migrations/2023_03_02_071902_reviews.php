@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('comment')->nullable();
             $table->integer('rating');
             $table->integer('product_id')->index();
+            $table->text('user_id')->index();
         });
     }
 

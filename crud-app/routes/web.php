@@ -33,6 +33,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('products', ProductController::class);
+//laravel specific authorization
+//middleware auth
+//kicks you to login and forces authorization
+Route::resource('products', ProductController::class)->middleware('auth');
 
 Route::resource('reviews', ReviewController::class);
