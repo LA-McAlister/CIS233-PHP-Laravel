@@ -31,4 +31,6 @@
     </tbody>
   </table>
 </div>
+
+@include('products.review')
 @endsection
