@@ -11,23 +11,24 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index()
     {
-        //
+        return view('users.index', ['users' => $users->paginate(10)]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
-        //
+        $user = new User;
+        return view('users.create', ['user' => $user]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -35,15 +36,8 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): Response
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id): Response
+    
+    public function edit($id)
     {
         //
     }
@@ -51,7 +45,7 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): RedirectResponse
+    public function update(Request $request, $id)
     {
         //
     }
@@ -59,7 +53,7 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): RedirectResponse
+    public function destroy($id)
     {
         //
     }
