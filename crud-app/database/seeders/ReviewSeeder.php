@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Faker\Provider\en_US\Text;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Review
 
 class ReviewSeeder extends Seeder
 {
@@ -19,8 +20,8 @@ class ReviewSeeder extends Seeder
 
     $faker = \Faker\Factory::create();
 
-    foreach (range(1,30) as $review) {
-      \App\Models\Review::create([
+    foreach (range(1,10) as $review) {
+          Review::create([
         'comment' => $faker->text,
         'rating' => $faker->numberBetween(1,5),
         'product_id' => \App\Models\Product::all()->pluck('id')->random()
