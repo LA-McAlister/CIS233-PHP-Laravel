@@ -24,6 +24,10 @@ class ReviewController extends Controller
 
   public function destroy($review_id)
   {
+    if ($request->user()->cannot('delete', [Review::class, Review::findOrFail($id)])) {
+      return redirect()->route('products.index')->with('error', 'You do not have permission');
+  };
+
     $review = Review::findOrFail($review_id);
     $review->delete();
 
