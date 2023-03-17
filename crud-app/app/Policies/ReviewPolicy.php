@@ -2,24 +2,24 @@
 
 namespace App\Policies;
 
-use App\Models\Product;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class ProductPolicy
+class ReviewPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-       //
+        return $user->role == "viewer" || $user->role == "administrator";
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Product $product): bool
+    public function view(User $user, Review $review): bool
     {
         //
     }
@@ -29,21 +29,21 @@ class ProductPolicy
      */
     public function create(User $user): bool
     {
-        return $user->role == "administrator";
+        return $user->role == "viewer" || $user->role == "administrator";
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user): bool
+    public function update(User $user, Review $review): bool
     {
-        return $user->role == "administrator";
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user): bool
+    public function delete(User $user, Review $review): bool
     {
         return $user->role == "administrator";
     }
@@ -51,7 +51,7 @@ class ProductPolicy
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Product $product): bool
+    public function restore(User $user, Review $review): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class ProductPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Product $product): bool
+    public function forceDelete(User $user, Review $review): bool
     {
         //
     }

@@ -24,7 +24,7 @@ class ProductController extends Controller
      * Show the form for creating a new resource.
      */
 
-    public function create()
+    public function create(Request $request)
     {
 
         if ($request->user()->cannot('create', Product::class)) {
@@ -40,10 +40,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->user()->cannot('create', Product::class)) {
-            return redirect()->route('products.index')->with('error', 'You do not have permission');
-        };
-
         Product::create($this->validatedData($request));
         return redirect()->route('products.index')->with('success', 'Product was added');
     }
@@ -61,9 +57,9 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        if ($request->user()->cannot('update', [Product::class, Product::findOrFail($id)])) {
+        if ($request->user()->cannot('update', Product::class)) {
             return redirect()->route('products.index')->with('error', 'You do not have permission');
         }
 
@@ -76,7 +72,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->user()->cannot('update', [Product::class, Product::findOrFail($id)])) {
+        if ($request->user()->cannot('update', Product::class)) {
             return redirect()->route('products.index')->with('error', 'You do not have permission');
         };
 
@@ -87,9 +83,9 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        if ($request->user()->cannot('delete', [Product::class, Product::findOrFail($id)])) {
+        if ($request->user()->cannot('delete', Product::class)) {
             return redirect()->route('products.index')->with('error', 'You do not have permission');
         };
 
