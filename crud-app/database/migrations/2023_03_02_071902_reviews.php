@@ -8,7 +8,9 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *  @return void
      */
+
     public function up(): void
     {
         Schema::create('reviews', function (Blueprint $table) {
@@ -17,15 +19,15 @@ return new class extends Migration
             $table->text('comment')->nullable();
             $table->integer('rating');
             $table->integer('product_id')->index();
-            $table->text('user_id')->index();
         });
     }
 
     /**
      * Reverse the migrations.
+     *  @return void
      */
     
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('reviews');
     }

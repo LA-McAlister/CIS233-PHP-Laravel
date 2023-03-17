@@ -1,5 +1,7 @@
 @extends('dashboard')
 @section('content')
+
+@can('create', App\Models\Product::class)
 <div class="container mt-5">
 <div class="column col-3">
   <h3>Add a Product</h3>
@@ -17,4 +19,5 @@
   </div>
 </form>
 </div>
+@endCan
 @endSection
