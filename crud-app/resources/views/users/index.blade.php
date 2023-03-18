@@ -1,4 +1,4 @@
-extends('dashboard')
+@extends('dashboard')
 
 @section('content')
 
@@ -16,18 +16,29 @@ extends('dashboard')
 </div>
 @endif
 
-<div class="container mt-5">
-  <a class="btn btn-primary" href="{{route('users.create')}}">Add User</a>
-  {{-- Pagination --}}
-  <div class="d-flex justify-content-center">
-    {!! $users->links() !!}
-  </div>
+</div>
+@if ( $errors->any() )
+<div class="alert alert-danger" role="alert">
+  @forEach ( $errors->all() as $error)
+  <span>{{$error}}</span><br />
+  @endForEach
+</div>
+@endIf
 
-  <table class="table table-bordered mb-5">
+@can('viewAny', App\Models\User::class)
+
+<div class="container mt-5">
+  <a class="btn btn-primary" href="{{route('users.create')}}">Create User</a>
+  <br>
+  <br>
+     {{ $users->links('pagination::bootstrap-4') }}
+ <br>
+  <table class="table table-bordered mb-5 $pink-400">
     <thead>
-      <tr class="table-success">
+      <tr class="table-danger">
         <th scope="col">Name</th>
         <th scope="col">Email</th>
+        <th><th>
       </tr>
     </thead>
     <tbody>
@@ -35,9 +46,9 @@ extends('dashboard')
       <tr>
         <th scope="row">{{ $user->name }}</th>
         <td>{{ $user->email }}</td>
-        <td><a class="btn btn-secondary" href="{{route('users.edit', $user->id)}}">Edit</a></td>
+        <td><a class="btn btn-info" href="{{route('users.edit', $user->id)}}">Edit</a></td>
         <td>
-          <form class="btn btn-danger" action="{{route('users.destroy', $user->id)}}" method="POST" onSubmit="return confirm('Confirm delete');">
+          <form class="btn btn-danger" action="{{route('users.destroy', $user->id)}}" method="POST" onSubmit="return confirm('Are you sure you want to delete?');">
             @csrf
             @method('DELETE')
             <button class="btn btn-error" type="submit">Delete</button>

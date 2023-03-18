@@ -16,12 +16,11 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->user()->cannot('viewAny', User::class)) {
+        if ($request->user()->cannot('view', User::class)) {
             return redirect()->route('products.index')->with('error', 'You do not have permission');
-        }
+        };
 
-        $users = User::with('reviews');
-        
+        $users = User::with('reviews'); 
         return view('users.index', ['users' => $users->paginate(10)]);
     }
 
@@ -30,7 +29,7 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        if ($request->user()->cannot('ViewAny', User::class)) {
+        if ($request->user()->cannot('View', User::class)) {
             return redirect()->route('products.index')->with('error', 'You do not have permission');
         }
 
@@ -75,7 +74,7 @@ class UserController extends Controller
     {
 
         $user =  User::findOrFail($id);
-        return view('user.edit', ['user' => $user]);
+        return view('users.edit', ['user' => $user]);
 
     }
 

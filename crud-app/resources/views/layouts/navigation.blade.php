@@ -24,6 +24,15 @@
                 </div>
             </div>
 
+            @can('viewAny', App\Models\User::class)
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        See All Users
+                    </x-nav-link>
+                </div>
+                @endCan
+            </div>
+
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
