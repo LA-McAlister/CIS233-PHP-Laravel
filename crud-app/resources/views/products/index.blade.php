@@ -31,8 +31,8 @@
           <th scope="col">Product Description</th>
           <th scope="col">Product Item Number</th>
           <th scope="col">Image of Item</th>
-          @can('update', App\Models\Product::class)
           <th></th>
+          @can('update', App\Models\Product::class)
           <th></th>
           <th></th>
           @endCan

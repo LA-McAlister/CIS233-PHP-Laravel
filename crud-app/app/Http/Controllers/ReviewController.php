@@ -37,6 +37,7 @@ class ReviewController extends Controller
       'comment' => 'required',
       'rating' => 'integer',
       'product_id' => 'integer|required',
+      'user_id' => 'required'
     ]);
     return $validatedData;
   }

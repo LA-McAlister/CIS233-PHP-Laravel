@@ -24,6 +24,7 @@
     </select>
     <label class="form-label" for="product_id" hidden>Product ID</label>
     <input type="number" name="product_id" class="form-control" value="{{$product->id}}" hidden />
+    <input type="number" name="user_id" class="form-control" value="{{Auth::user()->id}}" hidden />
   </table>
 </div>
 <div class="form-group">
@@ -42,6 +43,7 @@
   <table class="table table-bordered mb-5">
     <thead>
       <tr class="table-success">
+        <th scope="col">User</th>
         <th scope="col">Comment</th>
         <th scope="col">Rating</th>
         <th scope="col">Date Added</th>
@@ -53,10 +55,11 @@
     <tbody>
       @foreach($product->reviews as $review). 
       <tr>
-        <td><input type="hidden" id="user_id" name="user_id" value="{{ Auth::user()->id }}"></td>
+        <td>{{ Auth::user()->name }}</td>
         <td scope="row">{{ $review->comment }}</td>
         <td class="text-nowrap">@for($i = 0; $i < $review->rating; $i++ ) &#9733 @endFor </td>
         <td>{{ $review->created_at }}</td>
+        @can('delete', App\Models\Product::class)
         <td>
           <form class="btn btn-danger" action="{{route('reviews.destroy', $review->id)}}" method="POST" onSubmit="return confirm('Delete: press ok to confirm');">
             @csrf
@@ -64,6 +67,7 @@
             <button class="btn btn-error" type="submit">Delete</button>
           </form>
         </td>
+        @endcan
       </tr>
       @endforeach
     </tbody>
