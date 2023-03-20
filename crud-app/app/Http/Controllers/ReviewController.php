@@ -24,6 +24,7 @@ class ReviewController extends Controller
 
   public function destroy($review_id)
   {
+    
     $review = Review::findOrFail($review_id);
     $review->delete();
 
@@ -36,6 +37,7 @@ class ReviewController extends Controller
       'comment' => 'required',
       'rating' => 'integer',
       'product_id' => 'integer|required',
+      'user_id' => 'required'
     ]);
     return $validatedData;
   }
