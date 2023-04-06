@@ -1,4 +1,4 @@
-# McAlister cis233 PHP Laravel Application
+# McAlister PHP Laravel Application
 
 CRUD assignment
 
