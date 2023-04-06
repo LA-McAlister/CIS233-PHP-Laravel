@@ -1,4 +1,4 @@
-# McAlistercis233
+# McAlister cis233 PHP
 
 CRUD assignment
 
